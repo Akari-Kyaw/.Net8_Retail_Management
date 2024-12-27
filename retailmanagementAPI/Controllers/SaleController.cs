@@ -36,6 +36,31 @@ namespace retailmanagementAPI.Controllers
                 throw;
             }
         }
+        [HttpPost("AddSaleMutiple")]
+
+        public async Task<IActionResult> AddSaleMultiple(IEnumerable<AddSaleDTO> inputModel)
+        {
+            try
+            {
+                if (inputModel == null || !inputModel.Any())
+                {
+                    return BadRequest(new ResponseModel { Message = "Input model cannot be null or empty.", Status = APIStatus.Error });
+                }
+
+                await _saleService.AddSaleMultiple(inputModel);
+                return Ok(new ResponseModel { Message = "Add Success", Status = APIStatus.Successful });
+            }
+            //    await _saleService.AddSaleMultiple(inputModel);
+            //    return Ok(new ResponseModel { Message = "Add Success", Status = APIStatus.Successful });
+            
+
+            catch (Exception ex)
+            {
+                return Ok(new ResponseModel { Message = ex.InnerException.Message, Status = APIStatus.Error });
+
+                throw;
+            }
+        }
         [HttpGet("GetAllSale")]
         public async Task<IActionResult> GetAllSale()
         {
