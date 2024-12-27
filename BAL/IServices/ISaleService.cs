@@ -10,6 +10,8 @@ namespace BAL.IServices
     public interface ISaleService
     {
         Task AddSale(AddSaleDTO inputModel);
+        Task AddSaleMultiple(IEnumerable<AddSaleDTO >inputModel);
+
         Task<Show> ShowReport();
         Task DeleteReport(DeleteReportDTO inputModel);
 

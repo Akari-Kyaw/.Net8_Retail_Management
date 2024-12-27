@@ -45,6 +45,44 @@ namespace BAL.Services
                 throw;
             }
         }
+        public async Task AddSaleMultiple(IEnumerable <AddSaleDTO> inputModel)
+        {
+            try
+            {
+                foreach (var item in inputModel)
+                {
+                    var saleproduct = (await _unitOfWork.Products.GetByCondition(p => p.ProductId == item.ProductId && p.ActiveFlag==true)).FirstOrDefault();
+                    if(saleproduct != null)
+                    {
+                        if(saleproduct.RemainingStock<=item.Qty){
+                            throw new Exception("Product Quantity is not Enought"); 
+                       }
+                        if (saleproduct.RemainingStock == 0)
+                        {
+                            throw new Exception("Product Quantity is not be 0");
+
+                        }
+                        saleproduct.RemainingStock -= item.Qty;
+                        _unitOfWork.Products.Update(saleproduct);
+                        var salereport = new Retail_Sale()
+                        {
+                            ProductId = item.ProductId,
+                            Qty = item.Qty,
+                            TotalPrice = Convert.ToDecimal(item.Qty * saleproduct.SellingPrice),
+                            TotalProfit = Convert.ToDecimal(item.Qty * saleproduct.Profit),
+                            Created_by = item.Created_by,
+                        };
+                        await _unitOfWork.Sales.Add(salereport);
+                    }
+                }
+                await _unitOfWork.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+
+        }
         public async Task<Show> ShowReport()
         {
             var salereport = await _unitOfWork.Sales.GetAll();
