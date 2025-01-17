@@ -43,7 +43,7 @@ namespace BAL.Services
         {
             try
             {
-                var updateproduct = (await _unitOfWork.Products.GetByCondition(p=>p.ProductId==inputModel.ProductId)).FirstOrDefault();
+                var updateproduct = (await _unitOfWork.Products.GetByCondition(p=>p.ProductId==inputModel.ProductId && p.ActiveFlag==true)).FirstOrDefault();
                 if (updateproduct != null)
                 {
                     updateproduct.Name = inputModel.Name;
@@ -53,10 +53,7 @@ namespace BAL.Services
                     updateproduct.Updated_by = inputModel.Update_by;
                     _unitOfWork.Products.Update(updateproduct);
                 }
-                else
-                {
-                    throw new Exception("Product not found.");
-                }
+                
                     await _unitOfWork.SaveChangesAsync();
             }
             catch (Exception) 
@@ -69,16 +66,14 @@ namespace BAL.Services
         {
             try
             {
-                var deleteproduct = (await _unitOfWork.Products.GetByCondition(p => p.ProductId == inputModel.ProductId)).FirstOrDefault();
+                var deleteproduct = (await _unitOfWork.Products.GetByCondition(p => p.ProductId == inputModel.ProductId && p.ActiveFlag == true)).FirstOrDefault();
                 if (deleteproduct != null)
                 {
                     deleteproduct.ActiveFlag = false;
+                   _unitOfWork.Products.Update(deleteproduct);
                     await _unitOfWork.SaveChangesAsync();                   
                 }
-                else
-                {
-                    throw new Exception("Product not found.");
-                }
+                
             }
             catch (Exception)
             {

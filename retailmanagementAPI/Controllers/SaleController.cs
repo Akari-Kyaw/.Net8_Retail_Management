@@ -56,6 +56,7 @@ namespace retailmanagementAPI.Controllers
 
             catch (Exception ex)
             {
+                
                 return Ok(new ResponseModel { Message = ex.InnerException.Message, Status = APIStatus.Error });
 
                 throw;

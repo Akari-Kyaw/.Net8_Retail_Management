@@ -8,7 +8,7 @@ namespace Model.ApplicationConfig
 {
     public class ResponseModel
     {
-        public string? Message { get; set; } 
+        public string? Message { get; set; }
         public APIStatus Status { get; set; }
         public object? Data { get; set; }
     }

@@ -36,7 +36,6 @@ namespace retailmanagementAPI.Controllers
             {
                 return Ok(new ResponseModel { Message = ex.Message, Status = APIStatus.Error });
 
-                throw;
             }
         }
         [HttpGet("GetProductByID")]
