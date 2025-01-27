@@ -11,6 +11,7 @@ namespace Repository.UnitOfWork
     {
         IProductRepository Products {  get; }
         ISaleRepository Sales { get; }
+        IUserRepository Users { get; }
         Task<int> SaveChangesAsync();
 
     }

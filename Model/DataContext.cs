@@ -18,5 +18,6 @@ namespace Model
         }
         public virtual DbSet<Products> Products { get; set; }
         public virtual DbSet<Retail_Sale> Sales { get; set; }
+        public virtual DbSet<User> Users { get; set; }
     }
 }

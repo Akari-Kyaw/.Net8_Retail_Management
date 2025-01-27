@@ -8,6 +8,9 @@ using Repository.UnitOfWork;
 
 namespace retailmanagementAPI.Controllers
 {
+    [Route("api/[controller]")]
+    [Produces("application/json")]
+    [ApiController]
     public class UserController : ControllerBase
     {
         private readonly IUnitOfWork _unitOfWork;
@@ -68,7 +71,7 @@ namespace retailmanagementAPI.Controllers
         {
             try
             {
-                var returnData = _userService.UserLogin(userName, password);
+                var returnData = await _userService.UserLogin(userName, password);
                 return Ok(new ResponseModel { Message = "LogIn Success", Status = APIStatus.Successful, Data = returnData });
             }
             catch (Exception ex)

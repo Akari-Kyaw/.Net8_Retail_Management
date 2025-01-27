@@ -1,4 +1,5 @@
 ﻿using BAL.IService;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Model.ApplicationConfig;
@@ -7,9 +8,11 @@ using Repository.UnitOfWork;
 
 namespace retailmanagementAPI.Controllers
 {
+    [Authorize]
     [Produces("application/json")]
     [Route("api/[controller]")]
     [ApiController]
+
     public class ProductController : ControllerBase
     {
         private readonly IUnitOfWork _unitOfWork;

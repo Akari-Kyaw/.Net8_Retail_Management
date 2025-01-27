@@ -1,4 +1,8 @@
+using System.Text;
+using BAL.Common;
 using BAL.Shared;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
 using Model.ApplicationConfig;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -10,6 +14,7 @@ builder.Configuration.GetSection("AppSetting").Bind(appsetting);
 ServiceManager.SetServiceInfo(builder.Services, appsetting);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddAutoMapper(typeof(Program).Assembly);
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowAllOrigins", policy =>
@@ -19,6 +24,23 @@ builder.Services.AddCors(options =>
               .AllowAnyMethod();
     });
 });
+builder.Services.AddSingleton<TokenProvider>();
+builder.Services.AddSwaggerGenWithAuth();
+
+
+builder.Services.AddAuthorization();
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(option =>
+    {
+        option.RequireHttpsMetadata = false;
+        option.TokenValidationParameters = new TokenValidationParameters
+        {
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Secret"]!)),
+            ValidIssuer = builder.Configuration["Jwt:Issuer"],
+            ValidAudience = builder.Configuration["Jwt:Audience"],
+            ClockSkew = TimeSpan.Zero
+        };
+    });
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

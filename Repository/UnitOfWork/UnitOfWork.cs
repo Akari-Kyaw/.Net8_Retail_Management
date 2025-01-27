@@ -21,9 +21,12 @@ namespace Repository.UnitOfWork
             AppSetting  = appsetting.Value;
             Products=new ProductRespository(dataContext);
             Sales = new SaleRespository(dataContext);
+            Users = new UserRepository(dataContext);
+
         }
         public IProductRepository Products {  get; set; }
         public ISaleRepository Sales { get; set; }
+        public IUserRepository Users { get; set; }
 
         public AppSetting AppSetting { get; set; }  
         public void Dispose()

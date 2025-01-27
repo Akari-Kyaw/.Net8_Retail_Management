@@ -11,6 +11,7 @@ using Repository.UnitOfWork;
 using BAL.IService;
 using BAL.Services;
 using BAL.IServices;
+using BAL.Common;
 
 namespace BAL.Shared
 {
@@ -25,6 +26,8 @@ namespace BAL.Shared
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IProductService,ProductService>();
             services.AddScoped<ISaleService, SaleService>();
+            services.AddScoped<IUserService, UserService>();
+            services.AddScoped<TokenProvider, TokenProvider>();
 
         }
     }
