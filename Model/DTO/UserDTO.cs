@@ -15,6 +15,11 @@ namespace Model.DTO
         public string Created_by { get; set; }
 
     }
+    public class LogInDTO
+    {
+        public string userName { get; set; }
+        public string password { get; set; }
+    }
     public class UpdateUserDTO
     {
         public Guid UserId { get; set; }

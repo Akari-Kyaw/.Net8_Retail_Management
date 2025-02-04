@@ -114,23 +114,23 @@ namespace BAL.Services
                 throw;
             }
         }
-        public async Task<string> UserLogin(string userName, string password)
+        public async Task<string> UserLogin(LogInDTO inputmodel)
         {
             try
             {
-                if (string.IsNullOrWhiteSpace(userName) || string.IsNullOrWhiteSpace(password))
+                if (string.IsNullOrWhiteSpace(inputmodel.userName) || string.IsNullOrWhiteSpace(inputmodel.password))
                 {
                     throw new ArgumentException("UserName and Password cannot be null or empty.");
                 }
 
                 using (var sha256 = System.Security.Cryptography.SHA256.Create())
                 {
-                    var hashedBytes = sha256.ComputeHash(Encoding.UTF8.GetBytes(password));
-                    password = BitConverter.ToString(hashedBytes).Replace("-", "").ToLower();
+                    var hashedBytes = sha256.ComputeHash(Encoding.UTF8.GetBytes(inputmodel.password));
+                    inputmodel.password = BitConverter.ToString(hashedBytes).Replace("-", "").ToLower();
                 }
 
                 var verifyUser = (await _unitOfWork.Users
-                    .GetByCondition(x => x.Name == userName && x.Password == password))
+                    .GetByCondition(x => x.Name == inputmodel.userName && x.Password == inputmodel.password))
                     .FirstOrDefault();
 
                 if (verifyUser == null)

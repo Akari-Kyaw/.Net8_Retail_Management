@@ -15,6 +15,7 @@ namespace Model.Entities
         [Key]
         public Guid SaleId { get; set; } = new Guid();
         public Guid ? ProductId { get; set; }
+        public string? Name { get; set; }
         public int ? Qty { get; set; }
         public decimal ? TotalPrice { get; set; }
         public decimal ? TotalProfit { get; set; }

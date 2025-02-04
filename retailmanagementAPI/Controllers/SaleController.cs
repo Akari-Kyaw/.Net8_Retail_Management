@@ -9,7 +9,7 @@ using Repository.UnitOfWork;
 
 namespace retailmanagementAPI.Controllers
 {
-    [Authorize]
+    //[Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class SaleController : ControllerBase

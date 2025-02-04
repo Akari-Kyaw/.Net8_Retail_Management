@@ -28,7 +28,7 @@ namespace BAL.Services
                     Name=inputModel.Name,
                     RemainingStock=inputModel.RemainingStock,
                     SellingPrice=inputModel.SellingPrice,
-                    Profit=inputModel.Pofit,
+                    Profit=inputModel.Profit,
                     Created_by=inputModel.CreatedBy,
                 };
                 await _unitOfWork.Products.Add(addproduct);
@@ -49,7 +49,7 @@ namespace BAL.Services
                     updateproduct.Name = inputModel.Name;
                     updateproduct.RemainingStock = inputModel.RemainingStock;
                     updateproduct.SellingPrice = inputModel.SellingPrice;
-                    updateproduct.Profit = inputModel.Pofit;
+                    updateproduct.Profit = inputModel.Profit;
                     updateproduct.Updated_by = inputModel.Update_by;
                     _unitOfWork.Products.Update(updateproduct);
                 }

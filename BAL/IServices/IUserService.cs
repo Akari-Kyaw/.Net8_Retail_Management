@@ -9,7 +9,8 @@ namespace BAL.IServices
 {
     public interface IUserService
     {
-        Task<string> UserLogin(string userName, string password);
+        //Task<string> UserLogin(string userName, string password);
+        Task<string> UserLogin(LogInDTO inputmodel);
 
         Task AddUser(AddUserDTO inputModel);
         Task UpdateUser(UpdateUserDTO inputModel);

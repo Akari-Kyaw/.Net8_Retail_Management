@@ -29,6 +29,7 @@ namespace BAL.Services
                     var salereport = new Retail_Sale()
                     {
                         ProductId = inputModel.ProductId,
+                        Name = inputModel.Name,
                         Qty = inputModel.Qty,
                         TotalPrice = Convert.ToDecimal(inputModel.Qty * saleproduct.SellingPrice),
                         TotalProfit = Convert.ToDecimal(inputModel.Qty*saleproduct.Profit),
@@ -67,6 +68,7 @@ namespace BAL.Services
                         var salereport = new Retail_Sale()
                         {
                             ProductId = item.ProductId,
+                            Name = item.Name,
                             Qty = item.Qty,
                             TotalPrice = Convert.ToDecimal(item.Qty * saleproduct.SellingPrice),
                             TotalProfit = Convert.ToDecimal(item.Qty * saleproduct.Profit),

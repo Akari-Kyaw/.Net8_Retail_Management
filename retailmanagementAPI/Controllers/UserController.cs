@@ -67,11 +67,11 @@ namespace retailmanagementAPI.Controllers
         }
 
         [HttpPost("UserLogin")]
-        public async Task<IActionResult> UserLogin(string userName, string password)
+        public async Task<IActionResult> UserLogin(LogInDTO inputmodel)
         {
             try
             {
-                var returnData = await _userService.UserLogin(userName, password);
+                var returnData = await _userService.UserLogin(inputmodel);
                 return Ok(new ResponseModel { Message = "LogIn Success", Status = APIStatus.Successful, Data = returnData });
             }
             catch (Exception ex)

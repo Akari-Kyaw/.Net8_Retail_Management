@@ -10,6 +10,7 @@ namespace Model.DTO
     public class AddSaleDTO
     {
         public Guid ? ProductId { get; set; }
+        public string Name { get; set; }
         public int? Qty { get; set; }
         public string ? Created_by {  get; set; }
 

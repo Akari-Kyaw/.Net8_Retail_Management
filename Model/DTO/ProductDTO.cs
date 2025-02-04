@@ -12,7 +12,7 @@ namespace Model.DTO
         public string? Name { get; set; }
         public int? RemainingStock { get; set; }
         public decimal? SellingPrice { get; set; }
-        public decimal? Pofit {  get; set; }
+        public decimal? Profit {  get; set; }
         public string? CreatedBy { get; set; }
 
     }
@@ -22,7 +22,7 @@ namespace Model.DTO
         public string? Name { get; set; }
         public int? RemainingStock { get; set; }
         public decimal? SellingPrice { get; set; }
-        public decimal? Pofit { get; set; }
+        public decimal? Profit { get; set; }
         public string? Update_by { get; set; }
 
     }
